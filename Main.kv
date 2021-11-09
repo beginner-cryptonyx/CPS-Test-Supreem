@@ -1,0 +1,144 @@
+<Button>:
+    font_name: "Fonts/Font_Bold.ttf"
+#    background_normal = ''
+#    background_color = (128/255, 144/255, 133/255)
+    valign: "middle"
+    halign: "center"
+    text_size: self.width, None
+    font_size: '30'
+
+<HeaderLabel@Label>:
+    font_size: 18
+    font_name: 'Fonts/Font2_Bold.ttf'
+    valign: "middle"
+    halign: "center"
+    text_size: self.width, None
+
+MasterWindow:
+    MainScreen:
+    CpsCounter:
+    resultsScreen:
+    CountdownScreen
+
+<MainScreen>:
+
+    name: 'mainScreen'
+    StackLayout:
+
+        BoxLayout:
+            padding: 10
+            spacing: 5
+            orientation: 'horizontal'
+            size_hint: 1, 0.5
+            HeaderLabel:
+                text: 'T\nE\nS\nT\nI\nN\nG'
+                color: (0, 1, 0)
+                size_hint: 0.1, 1
+            Button:
+                id: btn1
+                text: 'Clicks Per Second x 10'
+                background_normal: ''
+                background_color: (0, 1, 0)
+                on_press:
+                    app.root.current = 'countdown'
+                    app.StartSwitchCountdown(secnd = 10, scr = 'CpsCounter')
+            Button:
+                id: btn2
+                text: 'Clicks Per Second x 5'
+                background_normal: ''
+                background_down: ''
+                background_color: (234/255, 245/255, 22/255)
+                on_release:
+                    app.ColorParityFix_Released(btn = 2)
+                on_press:
+                    app.ColorParityFix_Pressed(btn = 2)
+                    app.root.current = 'countdown'
+                    app.StartSwitchCountdown(secnd = 5, scr = 'CpsCounter')
+            Button:
+                id: btn3
+                text: 'Clicks Per Second x 1'
+                background_normal: ''
+                background_down: ''
+                background_color: (1, 0, 0, 1)
+                on_release:
+                    app.ColorParityFix_Released(btn = 3)
+                    app.root.current = 'countdown'
+                    app.StartSwitchCountdown(secnd = 1, scr = 'CpsCounter')
+                on_press:
+                    app.ColorParityFix_Pressed(btn = 3)
+
+        BoxLayout:
+            padding: 10
+            spacing: 5
+            orientation: 'horizontal'
+            size_hint: 1, 0.5
+            HeaderLabel:
+                text: 'T\nR\nA\nI\nN\nI\nN\nG'
+                color: (0, 0, 1)
+                size_hint: 0.1, 1
+            Button:
+                id: btn4
+                text: 'Aim Trainer'
+                background_normal: ''
+                background_color: (0, 1, 0)
+            Button:
+                id: btn5
+                text: 'Coming Soon'
+                background_normal: ''
+                background_down: ''
+                background_color: (234/255, 245/255, 22/255)
+                on_press:
+                    app.ColorParityFix_Pressed(btn = 5)
+                on_release:
+                    app.ColorParityFix_Released(btn = 5)
+            Button:
+                id: btn6
+                text: 'Coming Soon'
+                background_normal: ''
+                background_down: ''
+                background_color: (1, 0, 0, 1)
+                on_release:
+                    app.ColorParityFix_Released(btn = 6)
+                on_press:
+                    app.ColorParityFix_Pressed(btn = 6)
+
+<CountdownScreen>:
+    name: 'countdown'
+    Label:
+        id: coundownTimer
+        text: '3'
+        font_size: 150
+        color: (0,1,0)
+
+<CpsCounter>:
+    id: Cps Counter
+    name: 'CpsCounter'
+    Button:
+        text: 'click me '
+        on_press:
+            app.AddCPS()
+
+<resultsScreen>:
+    id: resultScreen
+    name: 'resultScreen'
+
+    StackLayout:
+        HeaderLabel:
+            text: 'Score:'
+            color: (0, 1, 0, 1)
+            size_hint: 1, 0.1
+
+        Label:
+            id: resultLabel
+            text: ''
+            color: (1,1,1,1)
+            size_hint: 1, 0.6
+
+        Button:
+            halign: 'center'
+            text: 'Home'
+            font_size: 32
+            size_hint: 1, 0.3
+#            pos_hint: {'right':0.5}
+            on_press:
+                app.root.current = 'mainScreen'
